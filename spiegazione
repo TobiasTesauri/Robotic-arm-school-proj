@@ -1,0 +1,67 @@
+Robotic arm made with arduino in the late 2024 as a school project
+
+all the non electronic parts of the robot were made with 3d printers 
+
+The first code we made consisted into controlling the robot with potentiometers , we had 4 of them for approx 6 servos ;
+
+#include <Servo.h>  // Include la libreria per i servomotori
+
+#define lenA 130.0
+#define lenB 120.0
+
+// Definizione dei pin per i potenziometri e i servomotori
+int potGrip = A0;  // Potenziometro 1
+int potR = A1;  // Potenziometro 2
+int potTheta = A2;  // Potenziometro 3
+int potPhi = A3;  // Potenziometro 4
+
+Servo servoGrip;      // Servomotore 1
+Servo servoA;      // Servomotore 2
+Servo servoB;      // Servomotore 3
+Servo servoC;      // Servomotore 4
+
+void setup() {
+  // Collegamento dei servomotori ai pin digitali
+  servoGrip.attach(9);
+  servoA.attach(10);
+  servoB.attach(11);
+  servoC.attach(12);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Leggi i valori dai potenziometri
+  int valGrip = analogRead(potGrip);  // Valore per servo1 e servo2
+  int valR = analogRead(potR);  // Valore per servo3 e servo4
+  int valTheta = analogRead(potTheta);  // Valore per servo5
+  int valPhi = analogRead(potPhi);  // Valore per servo6
+
+  // Mappa i valori letti (0-1023) ai valori angolari (0-180 gradi)
+  int tempGrip = map(valGrip, 0, 1023, 0, 90);  // Angolo per servo1
+  int tempR = map(valR, 0, 1023, 0, 90);  // Angolo per servo2 (ad esempio)
+  int tempTheta = map(valTheta, 0, 1023, 0, 90);  // Angolo per servo3
+  int angPhi = map(valPhi, 0, 1023, 0, 180);  // Angolo per servo4
+
+  // Imposta gli angoli dei servomotori
+  servoGrip.write(tempGrip);
+  servoA.write(tempR);
+  servoB.write(tempTheta);
+  servoC.write(angPhi);
+
+  // Stampa i valori angolari
+  Serial.print("Grip: ");
+  Serial.print(tempGrip);
+  Serial.print(" - R: ");
+  Serial.print(tempR);
+  Serial.print(" - Theta: ");
+  Serial.print(tempTheta);
+  Serial.print(" - Phi: ");
+  Serial.println(angPhi);
+
+  // Aggiungi un piccolo ri
+tardo per evitare letture troppo veloci
+
+}
+
+In the early stages the code was Spaghetticode , it was raw but it worked as the time went trought i refined it adding some kalman smoothing to soften the jitters
