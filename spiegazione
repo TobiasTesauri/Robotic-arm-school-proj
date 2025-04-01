@@ -1,6 +1,6 @@
-Robotic arm made with arduino in the late 2024 as a school project
+Robotic arm made with arduino in the late 2024 and early 2025 as a school project
 
-all the non electronic parts of the robot were made with 3d printers 
+all of the non electronic parts of the robot were made with 3d printers 
 
 The first code we made consisted into controlling the robot with potentiometers , we had 4 of them for approx 6 servos ;
 
@@ -65,3 +65,4 @@ tardo per evitare letture troppo veloci
 }
 
 In the early stages the code was Spaghetticode , it was raw but it worked as the time went trought i refined it adding some kalman smoothing to soften the jitters
+in the end we opted for the application made by HowToMechatronics changing a little bit the app in AppMaker , the servos are alimentated by a powebank while the Arduino is connected to a PC
